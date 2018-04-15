@@ -9,7 +9,7 @@ db.once('open', function() {
 });
 
   var contactSchema = new mongoose.Schema({
-    name:  String,
+    name:  { type : String , unique : true, required : true, dropDups: true },
     age: Number,
     phone:   Number,
     email: String,

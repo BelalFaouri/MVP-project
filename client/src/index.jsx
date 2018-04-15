@@ -106,23 +106,22 @@ class App extends React.Component{
 		return(
 			<div>
 			<div>
-		      <h4>Enter a contact info:</h4>
+		      <h4 >Enter a contact info:</h4>
 		    	<form>
-		      <label>Name: <input value={this.state.name} onChange={this.updateName}/></label><br/>      
-		      <label>Phone: <input value={this.state.phone} onChange={this.updatePhone}/></label><br/>       
-		      <label>Email: <input value={this.state.email} onChange={this.updateEmail}/></label><br/>       
-		      <label>Facebook name: <input value={this.state.facebook} onChange={this.updateFacebook}/></label> <br/>      
-		      <label>Twitter name: <input value={this.state.twitter} onChange={this.updateTwitter}/></label><br/>       
-		      <label>Google+ :<input value={this.state.googleplus} onChange={this.updateGoogle}/></label>       
+		      <label>Name: <input className="btn btn-default" value={this.state.name} onChange={this.updateName}/></label><br/>      
+		      <label>Phone: <input className="btn btn-default" value={this.state.phone} onChange={this.updatePhone}/></label><br/>       
+		      <label>Email: <input className="btn btn-default" value={this.state.email} onChange={this.updateEmail}/></label><br/>       
+		      <label>Facebook: <input className="btn btn-default" value={this.state.facebook} onChange={this.updateFacebook}/></label> <br/>      
+		      <label>Twitter: <input className="btn btn-default" value={this.state.twitter} onChange={this.updateTwitter}/></label><br/>       
+		      <label>Google+: <input className="btn btn-default" value={this.state.googleplus} onChange={this.updateGoogle}/></label>       
 		    </form> 
 	
-			<button onClick={this.addContact}>Create Contact</button>
-			<button onClick={this.deleteAll}>Delete all contacts</button>
+			<button className="btn btn-default" onClick={this.addContact}>Create Contact<br/></button>
+			<button className="btn btn-default" onClick={this.deleteAll}>Delete all contacts<br/></button>
 			<p>{"You have " + this.state.contacts.length + " contacts."}</p>
 			</div>
 			<ContactList contacts={this.state.contacts}/>
    			 </div>
-			
 			)
 	}
 }
