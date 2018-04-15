@@ -11,13 +11,14 @@ class App extends React.Component{
 		this.state={
 			contacts:[],
 			name: '',
-		    phone:0,
+		    phone:'',
 		    email: '',
 		    facebook:'',
 		    twitter:'',
 		    googleplus:''
 		}
 		this.addContact=this.addContact.bind(this)
+		this.deleteAll=this.deleteAll.bind(this)
 		this.updateName=this.updateName.bind(this)
 		this.updatePhone=this.updatePhone.bind(this)
 		this.updateEmail=this.updateEmail.bind(this)
@@ -26,7 +27,27 @@ class App extends React.Component{
 		this.updateGoogle=this.updateGoogle.bind(this)
 
 	}
+	deleteAll(){
+		$.ajax({
+      type: "PUT",
+      url: '/contacts',
+      data: {},
+      success: function(data){
+        console.log('success')
+      }
+     });
 
+			var that=this;
+
+		$.ajax({
+      type: "GET",
+      url: '/contacts',
+      success: function(data){
+      	that.setState({contacts:data})
+        console.log(that.state.contacts)
+      }
+     });		
+	}
 	addContact(){
 		$.ajax({
       type: "POST",
@@ -84,17 +105,21 @@ class App extends React.Component{
 
 		return(
 			<div>
+			<div>
 		      <h4>Enter a contact info:</h4>
-		      <form>
+		    	<form>
 		      <label>Name: <input value={this.state.name} onChange={this.updateName}/></label><br/>      
 		      <label>Phone: <input value={this.state.phone} onChange={this.updatePhone}/></label><br/>       
 		      <label>Email: <input value={this.state.email} onChange={this.updateEmail}/></label><br/>       
 		      <label>Facebook name: <input value={this.state.facebook} onChange={this.updateFacebook}/></label> <br/>      
 		      <label>Twitter name: <input value={this.state.twitter} onChange={this.updateTwitter}/></label><br/>       
 		      <label>Google+ :<input value={this.state.googleplus} onChange={this.updateGoogle}/></label>       
-		    </form>  
-			<button onClick={this.addContact}>send POST!</button>
-
+		    </form> 
+	
+			<button onClick={this.addContact}>Create Contact</button>
+			<button onClick={this.deleteAll}>Delete all contacts</button>
+			<p>{"You have " + this.state.contacts.length + " contacts."}</p>
+			</div>
 			<ContactList contacts={this.state.contacts}/>
    			 </div>
 			
@@ -104,3 +129,5 @@ class App extends React.Component{
 
 
 ReactDOM.render(<App />,document.getElementById('app'))
+
+

@@ -18,7 +18,7 @@ app.get('/',function(req,res){
 
 app.post('/',function(req,res){
 	db.makeContact(req.body)
-	// console.log(req.body)
+	res.end()
 	
 })
 
@@ -32,6 +32,21 @@ app.get('/contacts',function(req,res){
 	res.send(contacts)
 })
 })
+
+app.put('/contacts', function (req, res) {
+    
+    db.Contact.remove({}, function(err,contacts){
+    	if(err){
+    		return console.error(err)
+    	}else{
+    		console.log('Deleted all contacts!')
+    	}
+    })
+
+    res.end()
+
+}); 
+
 
 
 app.listen(5000,function(){
